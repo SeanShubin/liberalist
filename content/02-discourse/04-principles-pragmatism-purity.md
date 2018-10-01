@@ -1,0 +1,16 @@
+# Principles, Pragmatism, and Purity
+This is a common pattern with regressives.  As with all interactions with the regressives, remember your goal is to win them over to your side.  For public interactions expose how hypocritical their position is to spectators.  For private interactions you will want to stress how difficult it is for you to accept their position until they have addressed their double standards.  Remember we want to win as many of the regressives over to our side as possible, recovered victims of regressive ideas will be our strongest advocates.  Also remember it is unlikely to convert someone during a conversation, your job is to plant a seed of doubt and let their mind do the rest of the work.
+
+For the principle/pragmatism/purity pattern of conversation, start by challenging a principle that is not egalitarian.
+
+A typical challenge will go like this:
+
+(1) Challenge will be met with extreme mental gymnastics.  Reversing the roles on their argument (skin color for racist claims, gender for sexist claims, etc.) will usually be sufficient.  Otherwise use the same techniques for debunking the faith based claims of religion.
+
+(2) Once the principled position has been demolished, they will try to switch to a pragmatic argument without you noticing.  Keep pushing the argument back to principle until you get them to admit they have abandoned a principled position and are now arguing pragmatics.  Be especially insistent regarding how they would act if the roles were reversed.
+
+(2a) If they choose to be a hypocrite, explicitly call them out as such and don’t let the argument go beyond that.  Instead, keep comparing them to other hypocrites they are likely to already disagree with.  It is nearly impossible to get someone to see a flaw in themselves, but once you show how similar they are to those they already disagree with, they will be motivated to distinguish themselves as having the morally superior position.
+
+(2b) If they admit they are sacrificing principle for the sake of pragmatism, this becomes an evidence based argument.  Two types of arguments will ensue.  First is much debunked studies, easily countered once you are familiar with them.  The second will be appeals to ignorance.  Inequality of outcome will be cited as evidence for inequality of opportunity, with no regard for human agency.  Focus on the insufficient evidence for claims, alternative exclamations once human agency is accounted for, and the fact that you can justify any outlandish exclamation with appeal to ignorance.  Provide many alternative exclamations and point out that without evidence, there is no way to choose one over another.
+
+(3) Once principle and practice are debunked, their only recourse will be to resort personal attacks on your purity of race, class, sexual orientation, skills, gender, anything they deem to disqualify you from sufficient victim status.  This is a lot easier than it seems to call out if you are ready for it.  Ask them if they are now abandoning their pragmatic argument in favor of judging you based on your unchosen characteristics.  Ask how they think that feels to be judged that way.  Remember your goal is to place a seed of doubt, not convert them right away.
