@@ -1,9 +1,9 @@
 package org.liberalist.website
 
-import java.nio.file.Paths
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.options.MutableDataSet
+import java.nio.file.Paths
 
 fun main(args: Array<String>) {
     val baseDir = Paths.get(".")

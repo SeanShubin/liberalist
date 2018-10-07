@@ -42,47 +42,47 @@ object FilesDelegate : FilesContract {
     override fun createDirectories(dir: Path, vararg attrs: FileAttribute<*>): Path =
             Files.createDirectories(dir, *attrs)
 
-    override fun createTempFile(dir: Path, prefix: String, suffix: String, vararg attrs: FileAttribute<*>): Path=
+    override fun createTempFile(dir: Path, prefix: String, suffix: String, vararg attrs: FileAttribute<*>): Path =
             Files.createTempFile(dir, prefix, suffix, *attrs)
 
     override fun createTempFile(prefix: String, suffix: String, vararg attrs: FileAttribute<*>): Path =
             Files.createTempFile(prefix, suffix, *attrs)
 
-    override fun createTempDirectory(dir: Path, prefix: String, vararg attrs: FileAttribute<*>): Path=
+    override fun createTempDirectory(dir: Path, prefix: String, vararg attrs: FileAttribute<*>): Path =
             Files.createTempDirectory(dir, prefix, *attrs)
 
-    override fun createTempDirectory(prefix: String, vararg attrs: FileAttribute<*>): Path=
+    override fun createTempDirectory(prefix: String, vararg attrs: FileAttribute<*>): Path =
             Files.createTempDirectory(prefix, *attrs)
 
-    override fun createSymbolicLink(link: Path, target: Path, vararg attrs: FileAttribute<*>): Path=
+    override fun createSymbolicLink(link: Path, target: Path, vararg attrs: FileAttribute<*>): Path =
             Files.createSymbolicLink(link, target, *attrs)
 
-    override fun createLink(link: Path, existing: Path): Path=
+    override fun createLink(link: Path, existing: Path): Path =
             Files.createLink(link, existing)
 
-    override fun delete(path: Path)=Files.delete(path)
+    override fun delete(path: Path) = Files.delete(path)
 
-    override fun deleteIfExists(path: Path): Boolean=Files.deleteIfExists(path)
+    override fun deleteIfExists(path: Path): Boolean = Files.deleteIfExists(path)
 
-    override fun copy(source: Path, target: Path, vararg options: CopyOption): Path=
+    override fun copy(source: Path, target: Path, vararg options: CopyOption): Path =
             Files.copy(source, target, *options)
 
-    override fun move(source: Path, target: Path, vararg options: CopyOption): Path=
+    override fun move(source: Path, target: Path, vararg options: CopyOption): Path =
             Files.move(source, target, *options)
 
-    override fun readSymbolicLink(link: Path): Path=
+    override fun readSymbolicLink(link: Path): Path =
             Files.readSymbolicLink(link)
 
-    override fun getFileStore(path: Path): FileStore=
+    override fun getFileStore(path: Path): FileStore =
             Files.getFileStore(path)
 
-    override fun isSameFile(path: Path, path2: Path): Boolean=
+    override fun isSameFile(path: Path, path2: Path): Boolean =
             Files.isSameFile(path, path2)
 
-    override fun isHidden(path: Path): Boolean=
+    override fun isHidden(path: Path): Boolean =
             Files.isHidden(path)
 
-    override fun probeContentType(path: Path): String=
+    override fun probeContentType(path: Path): String =
             Files.probeContentType(path)
 
     override fun <V : FileAttributeView> getFileAttributeView(path: Path, type: Class<V>, vararg options: LinkOption): V? =
@@ -98,24 +98,24 @@ object FilesDelegate : FilesContract {
             Files.getAttribute(path, attribute, *options)
 
     override fun readAttributes(path: Path, attributes: String, vararg options: LinkOption): Map<String, Any> =
-        Files.readAttributes(path, attributes, *options)
+            Files.readAttributes(path, attributes, *options)
 
     override fun getPosixFilePermissions(path: Path, vararg options: LinkOption): Set<PosixFilePermission> =
             Files.getPosixFilePermissions(path, *options)
 
-    override fun setPosixFilePermissions(path: Path, perms: Set<PosixFilePermission>): Path=
+    override fun setPosixFilePermissions(path: Path, perms: Set<PosixFilePermission>): Path =
             Files.setPosixFilePermissions(path, perms)
 
-    override fun getOwner(path: Path, vararg options: LinkOption): UserPrincipal=
+    override fun getOwner(path: Path, vararg options: LinkOption): UserPrincipal =
             Files.getOwner(path, *options)
 
-    override fun setOwner(path: Path, owner: UserPrincipal): Path=
+    override fun setOwner(path: Path, owner: UserPrincipal): Path =
             Files.setOwner(path, owner)
 
-    override fun isSymbolicLink(path: Path): Boolean=
+    override fun isSymbolicLink(path: Path): Boolean =
             Files.isSymbolicLink(path)
 
-    override fun isDirectory(path: Path?, vararg options: LinkOption): Boolean=
+    override fun isDirectory(path: Path?, vararg options: LinkOption): Boolean =
             Files.isDirectory(path, *options)
 
     override fun isRegularFile(path: Path, vararg options: LinkOption): Boolean =
