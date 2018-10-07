@@ -18,16 +18,16 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
 
     private fun generateHtmlFromDir(fromDir: Path) {
         val files = filesContract.list(fromDir).filter(markdownFilesOnly)
-        generateHtmlFromFiles(files)
+        markdownFilesToHtmlFragments(files)
         val directories = filesContract.list(fromDir).filter(directoriesOnly)
         directories.forEach(::generateHtmlFromDir)
     }
 
-    private fun generateHtmlFromFiles(files: Stream<Path>) {
-        files.forEach(::generateHtmlFromFile)
+    private fun markdownFilesToHtmlFragments(files: Stream<Path>) {
+        files.forEach(::markdownFileToHtmlFragment)
     }
 
-    private fun generateHtmlFromFile(markdownFile: Path) {
+    private fun markdownFileToHtmlFragment(markdownFile: Path) {
         val relative = sourceMarkdownDir.relativize(markdownFile)
         val htmlFile = replaceExtension(generatedHtmlDir.resolve(relative), "html")
         val markdownContent = readFile(markdownFile)
@@ -55,7 +55,8 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
         val pathString = path.toString()
         val lastDotIndex = pathString.lastIndexOf('.')
         if (lastDotIndex == -1) {
-            throw RuntimeException("Unable to replace extension of $path, there was no dot '.' to indicate where the extension was")
+            throw RuntimeException(
+                    "Unable to replace extension of $path, there was no dot '.' to indicate where the extension was")
         }
         val newPathString = pathString.substring(0, lastDotIndex + 1) + extension
         return Paths.get(newPathString)
