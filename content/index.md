@@ -5,17 +5,17 @@ For example, the right not to be punched in the face comes with the correspondin
 If it were the case that all individuals were willing to not violate the rights of others without coercion, anarchy would be ideal.
 However, since we can not rely on the all individuals to behave, we need the state to protect individual rights.
 
-A “state” is a compulsory political organization with a centralized government that maintains a monopoly of the legitimate use of force within a certain geographical territory.
+A "state" is a compulsory political organization with a centralized government that maintains a monopoly of the legitimate use of force within a certain geographical territory.
 For a state to be liberal, it must have the following qualities:
 
 1. It must be empowered to protect individual freedom by being granted sole authority for legitimate use of force.
 2. It must be narrowly scoped by a constitution such that it can not be manipulated to violate individual freedom.
-3. It’s realization in practice must be accountable to the individuals who constitute it, such as by representative democracy.
+3. It's realization in practice must be accountable to the individuals who constitute it, such as by representative democracy.
 
 These qualities together, make constitutional democracy a necessary, although not sufficient, condition for a state to be liberal.
 The state derives its authority from a social contract entered into by every citizen within its borders possessing moral agency.
 The state is obligated to protect the parts of itself necessary to protect individual freedom.
-The state’s constitution must limit its own power sufficiently to prevent tyranny of the majority.
+The state's constitution must limit its own power sufficiently to prevent tyranny of the majority.
 Free exchange of ideas are essential to the integrity of a democracy, so the state must protect its citizens from censorship and compelled speech.
 
 There are many ideologies that can also be liberal according to their implementation, such as some forms of social democracy, objectivism, and libertarianism.

@@ -2,7 +2,7 @@
 The Condorcet Method of resolving votes
 
 ## Goal
-If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.  This is known as the “Condorcet Winner Criterion”.  Condorcet methods are good at ranking candidates in an order that accurately reflects voter preference.  The first step is allowing voters to express the entirety of their preference rather than just their #1 candidate.  A voter can do this by ranking candidates in order of preference.
+If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.  This is known as the "Condorcet Winner Criterion".  Condorcet methods are good at ranking candidates in an order that accurately reflects voter preference.  The first step is allowing voters to express the entirety of their preference rather than just their #1 candidate.  A voter can do this by ranking candidates in order of preference.
 
 For example, lets say you have this situation
 
@@ -18,7 +18,7 @@ To see why consider this:
 - 60% of the voters would rather have A than C
 - 60% of the voters would rather have B than C
 
-When the candidates are compared in pairs using a Condorcet method, it is obvious the accurate voter preference is A, then B, then C.  But when only the voter’s top most candidate is considered, we have thrown away so much information that the least preferred candidate, C, actually wins.  Since Condorcet method evaluate every candidate against every other candidate, the candidates in this same situation would be ranked A, then B, then C, which is consistent with the actual voter preference.
+When the candidates are compared in pairs using a Condorcet method, it is obvious the accurate voter preference is A, then B, then C.  But when only the voter's top most candidate is considered, we have thrown away so much information that the least preferred candidate, C, actually wins.  Since Condorcet method evaluate every candidate against every other candidate, the candidates in this same situation would be ranked A, then B, then C, which is consistent with the actual voter preference.
 
 Now consider this dilemma
 
@@ -26,7 +26,7 @@ Now consider this dilemma
 - 4 voters prefer B, then A, then C
 - 2 voters prefer C, then A, then B
 
-If we are counting the most first place votes (first past the post), although the 2 voters prefer C, they don’t dare vote that way because that would throw the election to B rather than A.  It is in the best interest of the 2 voters to not express their preference accurately.  This unfairly misrepresents the number of voters who actually preferred C, as that information about their preference was lost.
+If we are counting the most first place votes (first past the post), although the 2 voters prefer C, they don't dare vote that way because that would throw the election to B rather than A.  It is in the best interest of the 2 voters to not express their preference accurately.  This unfairly misrepresents the number of voters who actually preferred C, as that information about their preference was lost.
 
 A Condorcet method would compare the candidates in pairs, like so:
 
@@ -38,7 +38,7 @@ So the ranking becomes A, then B, then C.  In a Condorcet method, the 2 voters c
 
 Instant runoff voting does not meet Condorcet criteria, instead, it works like this:
 
-    Ballots are initially counted for each elector’s top choice,
+    Ballots are initially counted for each elector's top choice,
     losing candidates are eliminated, and ballots for losing
     candidates are redistributed until one candidate is the top
     remaining choice of a majority of the voters.
@@ -57,6 +57,6 @@ For example
 - 1 I B A
 - 1 J B A
 
-In both instant runoff voting and first past the post voting, A wins, even though 80% of the voters prefer B to A.  In instant runoff voting this is because, B, the one every single voter preferred over someone else’s top candidate, was the first one eliminated, having the least first place votes.  In first past the post voting it is because the vote was split by so much a single candidate was able win despite having a small minority of support.
+In both instant runoff voting and first past the post voting, A wins, even though 80% of the voters prefer B to A.  In instant runoff voting this is because, B, the one every single voter preferred over someone else's top candidate, was the first one eliminated, having the least first place votes.  In first past the post voting it is because the vote was split by so much a single candidate was able win despite having a small minority of support.
 
 There are other voting methods, but before advocating for one, it is a good idea to check how they resolve these examples compared to a Condorcet method, and make sure that is what you want.
