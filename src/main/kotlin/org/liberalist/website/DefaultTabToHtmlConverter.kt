@@ -6,8 +6,8 @@ object DefaultTabToHtmlConverter : TabToHtmlConverter {
         return """<!DOCTYPE html>
                  |<html lang="en">
                  |<head>
-                     <meta charset="UTF-8">
-                     <title>$title</title>
+                 |    <meta charset="UTF-8">
+                 |    <title>$title</title>
                  |</head>
                  |<body>
                  |$text
@@ -43,19 +43,5 @@ object DefaultTabToHtmlConverter : TabToHtmlConverter {
         }
     }
 
-    private fun tabsToHtml(tabs: List<Tab>): List<String> {
-        return tabs.flatMap(::tabToHtmlRecursive)
-    }
-
-    private fun ul(text: String, childText: List<String>): List<String> {
-        return element("ul", text, childText)
-    }
-
-    private fun element(tagName: String, text: String, childText: List<String>): List<String> {
-        return listOf("""<$tagName>$text""") + childText + listOf("""</$tagName>""").map(::indent)
-    }
-
-    private fun indent(line: String): String = "  $line"
-
-
+    private fun indent(line: String): String = "    $line"
 }
