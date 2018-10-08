@@ -11,7 +11,8 @@ object DependencyInjection {
     private val generatedHtmlDir: Path = baseDir.resolve(Paths.get("build", "html"))
     private val filesContract: FilesContract = FilesDelegate
     private val charset: Charset = StandardCharsets.UTF_8
-    private val converter: Converter = FlexmarkConverter
+    private val markdownToHtmlConverter: MarkdownToHtmlConverter = FlexmarkConverter
+    private val tabToHtmlConverter: TabToHtmlConverter = DefaultTabToHtmlConverter
     private val emitLine: (String) -> Unit = ::println
     private val notifications: Notifications = LineEmittingNotifications(emitLine)
     private val htmlGenerator: HtmlGenerator = MarkdownHtmlGenerator(
@@ -19,7 +20,8 @@ object DependencyInjection {
             generatedHtmlDir,
             filesContract,
             charset,
-            converter,
+            markdownToHtmlConverter,
+            tabToHtmlConverter,
             notifications::fileWrite)
     val deploySiteRunner: Runnable = DeploySite(htmlGenerator)
 }

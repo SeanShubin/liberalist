@@ -1,5 +1,5 @@
 package org.liberalist.website
 
-interface Converter {
+interface MarkdownToHtmlConverter {
     fun markdownToHtml(markdown: String): String
 }
