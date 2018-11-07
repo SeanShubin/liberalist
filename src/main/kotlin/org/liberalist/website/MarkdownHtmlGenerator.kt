@@ -3,7 +3,6 @@ package org.liberalist.website
 import java.nio.charset.Charset
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.util.function.Predicate
 import java.util.stream.Stream
 import kotlin.streams.toList
 
@@ -13,7 +12,10 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
                             private val charset: Charset,
                             private val markdownToHtmlConverter: MarkdownToHtmlConverter,
                             private val tabToHtmlConverter: TabToHtmlConverter,
-                            private val notifyWrite: (Path, String) -> Unit) : HtmlGenerator {
+                            private val notifyWrite: (Path, String) -> Unit,
+                            private val fileFilter: FileFilter) : HtmlGenerator {
+    private val markdownFilesOnly = fileFilter.fileEndsWith(".md")
+    private val directoriesOnly = fileFilter.isDirectory
     override fun generateHtml() {
         val tab = generateHtmlFromDir(sourceMarkdownDir)
         generateTableOfContents(tab)
@@ -75,7 +77,4 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
         return Paths.get(newPathString)
     }
 
-    private val markdownFilesOnly: Predicate<Path> = Predicate { path -> filesContract.isRegularFile(path) && path.toString().endsWith(".md") }
-
-    private val directoriesOnly: Predicate<Path> = Predicate { path -> filesContract.isDirectory(path) }
 }
