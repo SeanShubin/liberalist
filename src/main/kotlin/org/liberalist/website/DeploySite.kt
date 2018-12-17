@@ -1,9 +1,9 @@
 package org.liberalist.website
 
-class DeploySite(private val htmlGenerator: HtmlGenerator,
-                 private val fileCopier: FileCopier) : Runnable {
+class DeploySite(private val htmlGenerator: () -> Unit,
+                 private val fileCopier: () -> Unit) : Runnable {
     override fun run() {
-        htmlGenerator.generateHtml()
-        fileCopier.copyFiles()
+        htmlGenerator()
+        fileCopier()
     }
 }

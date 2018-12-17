@@ -3,7 +3,6 @@ package org.liberalist.website
 import java.nio.charset.Charset
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.util.stream.Stream
 import kotlin.streams.toList
 
 class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
@@ -13,10 +12,10 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
                             private val markdownToHtmlConverter: MarkdownToHtmlConverter,
                             private val tabToHtmlConverter: TabToHtmlConverter,
                             private val notifyWrite: (Path, String) -> Unit,
-                            private val fileFilter: FileFilter) : HtmlGenerator {
+                            private val fileFilter: FileFilter) : () -> Unit {
     private val markdownFilesOnly = fileFilter.fileEndsWith(".md")
     private val directoriesOnly = fileFilter.isDirectory
-    override fun generateHtml() {
+    override fun invoke() {
         val tab = generateHtmlFromDir(sourceMarkdownDir)
         generateTableOfContents(tab)
     }
@@ -28,16 +27,16 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
     }
 
     private fun generateHtmlFromDir(fromDir: Path): Tab {
-        val files = filesContract.list(fromDir).filter(markdownFilesOnly).sorted()
+        val files = filesContract.list(fromDir).filter(markdownFilesOnly).sorted().toList()
         val fileTabs: List<Tab> = markdownFilesToHtmlFragments(files)
-        val directories = filesContract.list(fromDir).filter(directoriesOnly).sorted()
-        val dirTabs: List<Tab> = directories.map(::generateHtmlFromDir).toList()
+        val directories = filesContract.list(fromDir).filter(directoriesOnly).sorted().toList()
+        val dirTabs: List<Tab> = directories.map(::generateHtmlFromDir)
         val tab = Tab(fromDir.toString(), fileTabs + dirTabs)
         return tab
     }
 
-    private fun markdownFilesToHtmlFragments(files: Stream<Path>): List<Tab> {
-        return files.map(::markdownFileToHtmlFragment).toList()
+    private fun markdownFilesToHtmlFragments(files: List<Path>): List<Tab> {
+        return files.map(::markdownFileToHtmlFragment)
     }
 
     private fun markdownFileToHtmlFragment(markdownFile: Path): Tab {

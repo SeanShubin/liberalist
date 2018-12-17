@@ -16,7 +16,7 @@ object DependencyInjection {
     private val emitLine: (String) -> Unit = ::println
     private val notifications: Notifications = LineEmittingNotifications(emitLine)
     private val fileFilter: FileFilter = FileFilter(filesContract)
-    private val htmlGenerator: HtmlGenerator = MarkdownHtmlGenerator(
+    private val htmlGenerator: () -> Unit = MarkdownHtmlGenerator(
             sourceDir,
             generatedDir,
             filesContract,
@@ -25,13 +25,6 @@ object DependencyInjection {
             tabToHtmlConverter,
             notifications::fileWrite,
             fileFilter)
-    private val fileUtil = FileUtil(filesContract)
-    private val htmlCssJsFileCopier: FileProcessor = ConfigurableFileProcessor(
-            fileUtil.listFiles,
-            fileUtil.isDirectory,
-            fileUtil.isHtmlCssJsFile,
-            fileUtil.copyFile
-    )
-    private val fileCopier: FileCopier = ProcessingFileCopier(sourceDir, generatedDir, htmlCssJsFileCopier)
+    private val fileCopier: () -> Unit = HtmlCssJsFileCopier(sourceDir, generatedDir, filesContract)
     val deploySiteRunner: Runnable = DeploySite(htmlGenerator, fileCopier)
 }

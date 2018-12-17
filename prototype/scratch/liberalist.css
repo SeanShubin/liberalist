@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, li {
+    font-family: Arial, sans-serif;
+}
+
+a:link, a:visited {
+    color: #006ec3;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 225%;
+}
+
+h5 {
+    font-size: 0.83em;
+}
+
+nav ul {
+    display: block;
+}
+
+nav li {
+    float: left;
+}
+
+.grid-a {
+    grid-template-columns: 1fr auto 1fr;
+}
+
+.grid-a > div {
+    border: 5px solid black;
+}
+
+.grid-b {
+    grid-template-columns:
+}
