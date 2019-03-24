@@ -1,13 +1,6 @@
 const urlLib = createUrlLib();
 const fragmentLib = createFragmentLib();
 
-const debugText = (text) => {
-    const p = document.createElement('p');
-    const textNode = document.createTextNode(text);
-    p.appendChild(textNode);
-    document.body.appendChild(p);
-};
-
 const urlToPageName = (url) => {
     const parsed = urlLib.parseUrl(url);
     const target = 'page';
@@ -17,50 +10,7 @@ const urlToPageName = (url) => {
     return pageName
 };
 
-const model = {
-    'a': {
-        tabBars: [[
-            {title: 'A Title', page: 'a', selected: true},
-            {title: 'C Title', page: 'c', selected: false},
-            {title: 'E Title', page: 'e', selected: false}]],
-        fragment: 'a.html'
-    },
-    'c': {
-        tabBars: [
-            [
-                {title: 'A Title', page: 'a', selected: false},
-                {title: 'C Title', page: 'c', selected: true},
-                {title: 'E Title', page: 'e', selected: false}
-            ],
-            [
-                {title: 'C Title', page: 'c', selected: true},
-                {title: 'D Title', page: 'd', selected: false}
-            ]],
-        fragment: 'b/c.html'
-    },
-    'd': {
-        tabBars: [
-            [
-                {title: 'A Title', page: 'a', selected: false},
-                {title: 'C Title', page: 'c', selected: true},
-                {title: 'E Title', page: 'e', selected: false}
-            ],
-            [
-                {title: 'C Title', page: 'c', selected: false},
-                {title: 'D Title', page: 'd', selected: true}
-            ]],
-        fragment: 'b/d.html'
-    },
-    'e': {
-        tabBars: [
-            [
-                {title: 'A Title', page: 'a', selected: false},
-                {title: 'C Title', page: 'c', selected: false},
-                {title: 'E Title', page: 'e', selected: true}
-            ]],
-        fragment: 'e.html'
-    }
-};
+const modelPromise = fragmentLib.loadJsonFromUrl('model.json');
 
 const createDiv = () => document.createElement('div');
 const createUl = () => document.createElement('ul');
@@ -71,12 +21,6 @@ const createLink = (args) => {
     a.href = href;
     a.text = text;
     return a;
-};
-
-const renderParagraph = (text) => {
-    const p = document.createElement('p');
-    p.textContent = text;
-    return p;
 };
 
 const renderTabBar = (args) => {
@@ -118,6 +62,7 @@ const renderPageModel = async (pageModel) => {
 const render = async () => {
     const url = window.location;
     const pageName = urlToPageName(url);
+    const model = await modelPromise;
     const pageModel = model[pageName];
     return await renderPageModel(pageModel)
 };

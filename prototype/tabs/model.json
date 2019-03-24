@@ -1,0 +1,114 @@
+{
+  "a": {
+    "tabBars": [
+      [
+        {
+          "title": "A Title",
+          "page": "a",
+          "selected": true
+        },
+        {
+          "title": "C Title",
+          "page": "c",
+          "selected": false
+        },
+        {
+          "title": "E Title",
+          "page": "e",
+          "selected": false
+        }
+      ]
+    ],
+    "fragment": "a.html"
+  },
+  "c": {
+    "tabBars": [
+      [
+        {
+          "title": "A Title",
+          "page": "a",
+          "selected": false
+        },
+        {
+          "title": "C Title",
+          "page": "c",
+          "selected": true
+        },
+        {
+          "title": "E Title",
+          "page": "e",
+          "selected": false
+        }
+      ],
+      [
+        {
+          "title": "C Title",
+          "page": "c",
+          "selected": true
+        },
+        {
+          "title": "D Title",
+          "page": "d",
+          "selected": false
+        }
+      ]
+    ],
+    "fragment": "b/c.html"
+  },
+  "d": {
+    "tabBars": [
+      [
+        {
+          "title": "A Title",
+          "page": "a",
+          "selected": false
+        },
+        {
+          "title": "C Title",
+          "page": "c",
+          "selected": true
+        },
+        {
+          "title": "E Title",
+          "page": "e",
+          "selected": false
+        }
+      ],
+      [
+        {
+          "title": "C Title",
+          "page": "c",
+          "selected": false
+        },
+        {
+          "title": "D Title",
+          "page": "d",
+          "selected": true
+        }
+      ]
+    ],
+    "fragment": "b/d.html"
+  },
+  "e": {
+    "tabBars": [
+      [
+        {
+          "title": "A Title",
+          "page": "a",
+          "selected": false
+        },
+        {
+          "title": "C Title",
+          "page": "c",
+          "selected": false
+        },
+        {
+          "title": "E Title",
+          "page": "e",
+          "selected": true
+        }
+      ]
+    ],
+    "fragment": "e.html"
+  }
+}

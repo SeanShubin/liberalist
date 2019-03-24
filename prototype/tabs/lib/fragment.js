@@ -6,6 +6,13 @@ const createFragmentLib = () => {
         return text;
     };
 
+    const loadJsonFromUrl = async (url) => {
+        const result = await fetch(url);
+        const text = result.json();
+        console.log('loaded ' + text.length + ' bytes from ' + url);
+        return text;
+    };
+
     const textToElement = text => {
         const domParser = new DOMParser();
         const parsed = domParser.parseFromString(text, 'text/xml');
@@ -20,6 +27,7 @@ const createFragmentLib = () => {
     };
 
     return {
-        loadElementFromUrl
+        loadElementFromUrl,
+        loadJsonFromUrl
     }
 };
