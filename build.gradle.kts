@@ -14,6 +14,10 @@ repositories {
 dependencies {
     compile(kotlin("stdlib-jdk8"))
     compile("com.vladsch.flexmark", "flexmark-all", "0.34.46")
+//    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-junit"))
+//    testImplementation(kotlin("test-common"))
+//    testImplementation(kotlin("test-annotations-common"))
 }
 
 tasks.withType<KotlinCompile> {

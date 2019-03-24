@@ -1,5 +1,6 @@
 package org.liberalist.website
 
+import org.liberalist.website.contract.FilesContract
 import java.nio.charset.Charset
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -22,7 +23,7 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
 
     private fun generateTableOfContents(tab: Tab) {
         val tableOfContentsFile = generatedHtmlDir.resolve("index.html")
-        val text = tabToHtmlConverter.tabToTopLevelHtml(tab)
+        val text = tabToHtmlConverter.tabToTopLevelHtml("Liberalist", tab)
         writeFile(tableOfContentsFile, text)
     }
 
@@ -31,7 +32,8 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
         val fileTabs: List<Tab> = markdownFilesToHtmlFragments(files)
         val directories = filesContract.list(fromDir).filter(directoriesOnly).sorted().toList()
         val dirTabs: List<Tab> = directories.map(::generateHtmlFromDir)
-        val tab = Tab(fromDir.toString(), fileTabs + dirTabs)
+        val tabPath = TabPath.fromPath(filesContract, sourceMarkdownDir, fromDir)
+        val tab = Tab(tabPath, fileTabs + dirTabs)
         return tab
     }
 
@@ -45,7 +47,8 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
         val markdownContent = readFile(markdownFile)
         val htmlContent: String = markdownToHtmlConverter.markdownToHtml(markdownContent)
         writeFile(htmlFile, htmlContent)
-        val tab = Tab(markdownFile.toString())
+        val tabPath = TabPath.fromPath(filesContract, sourceMarkdownDir, markdownFile)
+        val tab = Tab(tabPath)
         return tab
     }
 

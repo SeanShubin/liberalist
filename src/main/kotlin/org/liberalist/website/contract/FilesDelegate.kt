@@ -1,4 +1,4 @@
-package org.liberalist.website
+package org.liberalist.website.contract
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
@@ -18,7 +18,11 @@ object FilesDelegate : FilesContract {
     override fun newOutputStream(path: Path, vararg options: OpenOption): OutputStream =
             Files.newOutputStream(path, *options)
 
-    override fun newByteChannel(path: Path, options: Set<OpenOption>, vararg attrs: FileAttribute<*>): SeekableByteChannel =
+    override fun newByteChannel(
+            path: Path,
+            options: Set<OpenOption>,
+            vararg attrs: FileAttribute<*>
+    ): SeekableByteChannel =
             Files.newByteChannel(path, options, *attrs)
 
     override fun newByteChannel(path: Path, vararg options: OpenOption): SeekableByteChannel =
@@ -36,7 +40,7 @@ object FilesDelegate : FilesContract {
     override fun createFile(path: Path, vararg attrs: FileAttribute<*>): Path =
             Files.createFile(path, *attrs)
 
-    override fun createDirectory(dir: Path?, vararg attrs: FileAttribute<*>): Path =
+    override fun createDirectory(dir: Path, vararg attrs: FileAttribute<*>): Path =
             Files.createDirectory(dir, *attrs)
 
     override fun createDirectories(dir: Path, vararg attrs: FileAttribute<*>): Path =
@@ -60,9 +64,11 @@ object FilesDelegate : FilesContract {
     override fun createLink(link: Path, existing: Path): Path =
             Files.createLink(link, existing)
 
-    override fun delete(path: Path) = Files.delete(path)
+    override fun delete(path: Path) =
+            Files.delete(path)
 
-    override fun deleteIfExists(path: Path): Boolean = Files.deleteIfExists(path)
+    override fun deleteIfExists(path: Path): Boolean =
+            Files.deleteIfExists(path)
 
     override fun copy(source: Path, target: Path, vararg options: CopyOption): Path =
             Files.copy(source, target, *options)
@@ -85,10 +91,13 @@ object FilesDelegate : FilesContract {
     override fun probeContentType(path: Path): String =
             Files.probeContentType(path)
 
-    override fun <V : FileAttributeView> getFileAttributeView(path: Path, type: Class<V>, vararg options: LinkOption): V? =
-            Files.getFileAttributeView(path, type, *options)
+    override fun <V : FileAttributeView> getFileAttributeView(
+            path: Path,
+            type: Class<V>,
+            vararg options: LinkOption
+    ): V? = Files.getFileAttributeView(path, type, *options)
 
-    override fun <A : BasicFileAttributes> readAttributes(path: Path?, type: Class<A>, vararg options: LinkOption): A =
+    override fun <A : BasicFileAttributes> readAttributes(path: Path, type: Class<A>, vararg options: LinkOption): A =
             Files.readAttributes(path, type, *options)
 
     override fun setAttribute(path: Path, attribute: String, value: Any, vararg options: LinkOption): Path =
@@ -115,7 +124,7 @@ object FilesDelegate : FilesContract {
     override fun isSymbolicLink(path: Path): Boolean =
             Files.isSymbolicLink(path)
 
-    override fun isDirectory(path: Path?, vararg options: LinkOption): Boolean =
+    override fun isDirectory(path: Path, vararg options: LinkOption): Boolean =
             Files.isDirectory(path, *options)
 
     override fun isRegularFile(path: Path, vararg options: LinkOption): Boolean =
@@ -145,7 +154,12 @@ object FilesDelegate : FilesContract {
     override fun isExecutable(path: Path): Boolean =
             Files.isExecutable(path)
 
-    override fun walkFileTree(start: Path, options: Set<FileVisitOption>, maxDepth: Int, visitor: FileVisitor<in Path>): Path =
+    override fun walkFileTree(
+            start: Path,
+            options: Set<FileVisitOption>,
+            maxDepth: Int,
+            visitor: FileVisitor<in Path>
+    ): Path =
             Files.walkFileTree(start, options, maxDepth, visitor)
 
     override fun walkFileTree(start: Path, visitor: FileVisitor<in Path>): Path =
@@ -153,6 +167,9 @@ object FilesDelegate : FilesContract {
 
     override fun newBufferedReader(path: Path, cs: Charset): BufferedReader =
             Files.newBufferedReader(path, cs)
+
+    override fun newBufferedReader(path: Path): BufferedReader =
+            Files.newBufferedReader(path)
 
     override fun newBufferedWriter(path: Path, cs: Charset, vararg options: OpenOption): BufferedWriter =
             Files.newBufferedWriter(path, cs, *options)
@@ -169,8 +186,17 @@ object FilesDelegate : FilesContract {
     override fun readAllBytes(path: Path): ByteArray =
             Files.readAllBytes(path)
 
+    override fun readString(path: Path): String =
+            Files.readString(path)
+
+    override fun readString(path: Path, cs: Charset): String =
+            Files.readString(path, cs)
+
     override fun readAllLines(path: Path, cs: Charset): List<String> =
             Files.readAllLines(path, cs)
+
+    override fun readAllLines(path: Path): List<String> =
+            Files.readAllLines(path)
 
     override fun write(path: Path, bytes: ByteArray, vararg options: OpenOption): Path =
             Files.write(path, bytes, *options)
@@ -181,18 +207,32 @@ object FilesDelegate : FilesContract {
     override fun write(path: Path, lines: Iterable<CharSequence>, vararg options: OpenOption): Path =
             Files.write(path, lines, *options)
 
+    override fun writeString(path: Path, csq: CharSequence, vararg options: OpenOption): Path =
+            Files.writeString(path, csq, *options)
+
+    override fun writeString(path: Path, csq: CharSequence, cs: Charset, vararg options: OpenOption): Path =
+            Files.writeString(path, csq, cs, *options)
+
     override fun list(dir: Path): Stream<Path> =
             Files.list(dir)
-
-    override fun walk(start: Path, maxDepth: Int, vararg options: FileVisitOption): Stream<Path> =
-            Files.walk(start, maxDepth, *options)
 
     override fun walk(start: Path, vararg options: FileVisitOption): Stream<Path> =
             Files.walk(start, *options)
 
-    override fun find(start: Path, maxDepth: Int, matcher: BiPredicate<Path, BasicFileAttributes>, vararg options: FileVisitOption): Stream<Path> =
-            Files.find(start, maxDepth, matcher)
+    override fun walk(start: Path, maxDepth: Int, vararg options: FileVisitOption): Stream<Path> =
+            Files.walk(start, maxDepth, *options)
+
+    override fun find(
+            start: Path,
+            maxDepth: Int,
+            matcher: BiPredicate<Path, BasicFileAttributes>,
+            vararg options: FileVisitOption
+    ): Stream<Path> =
+            Files.find(start, maxDepth, matcher, *options)
 
     override fun lines(path: Path, cs: Charset): Stream<String> =
             Files.lines(path, cs)
+
+    override fun lines(path: Path): Stream<String> =
+            Files.lines(path)
 }

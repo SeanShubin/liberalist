@@ -1,47 +1,56 @@
 package org.liberalist.website
 
+import org.liberalist.website.Html.anchor
+import org.liberalist.website.Html.li
+import org.liberalist.website.Html.ul
+
 object DefaultTabToHtmlConverter : TabToHtmlConverter {
-    override fun tabToTopLevelHtml(tab: Tab): String = htmlWrapper(tab.name, tabToHtml(tab))
+    override fun tabToTopLevelHtml(title: String, tab: Tab): String {
+        val text = tabToHtml(tab)
+        val result = htmlWrapper(title, text)
+        return result
+    }
+
     private fun htmlWrapper(title: String, text: String): String {
-        return """<!DOCTYPE html>
+        val result =
+                """<!DOCTYPE html>
                  |<html lang="en">
                  |<head>
                  |    <meta charset="UTF-8">
-                 |    <title>$title</title>
+                 |    <name>$title</name>
                  |</head>
                  |<body>
                  |$text
                  |</body>
                  |</html>""".trimMargin()
+        return result
     }
 
     private fun tabToHtml(tab: Tab): String {
-        return tabToHtmlRecursive(tab).joinToString("\n")
+        val lines = tabToHtmlRecursive(tab)
+        val result = lines.joinToString("\n")
+        return result
     }
 
     private fun tabToHtmlRecursive(tab: Tab): List<String> {
-        return if (tab.subTabs.isEmpty()) {
-            listOf("<ul>${tab.name}</ul>")
-        } else {
-            listOf("<ul>") + subTabsToHtml(tab.subTabs).map(::indent) + listOf("</ul>")
-        }
+        val result = ul(subTabsToHtml(tab.subTabs))
+        return result
     }
 
     private fun subTabsToHtml(subTabs: List<Tab>): List<String> {
-        return subTabs.flatMap(::subTabToHtml)
+        val result = subTabs.flatMap(::subTabToHtml)
+        return result
     }
 
     private fun subTabToHtml(subTab: Tab): List<String> {
-        return if (subTab.subTabs.isEmpty()) {
-            listOf("<li>${subTab.name}</li>")
-
+        val result = if (subTab.subTabs.isEmpty()) {
+            li(anchor(subTab.name, subTab.href))
         } else {
-            listOf("<li>${subTab.name}") +
-                    tabToHtmlRecursive(subTab).map(::indent) +
-                    listOf("</li>")
-
+            val header = anchor(subTab.name, subTab.href)
+            val childContent = tabToHtmlRecursive(subTab)
+            val content = header + childContent
+            li(content)
         }
+        return result
     }
-
-    private fun indent(line: String): String = "    $line"
 }

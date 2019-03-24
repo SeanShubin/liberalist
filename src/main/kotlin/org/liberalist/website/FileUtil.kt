@@ -1,5 +1,6 @@
 package org.liberalist.website
 
+import org.liberalist.website.contract.FilesContract
 import java.nio.file.Path
 
 object FileUtil {

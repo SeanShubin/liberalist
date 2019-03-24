@@ -1,5 +1,4 @@
-package org.liberalist.website
-
+package org.liberalist.website.contract
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
@@ -7,7 +6,6 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.nio.channels.SeekableByteChannel
 import java.nio.charset.Charset
-import java.nio.charset.StandardCharsets
 import java.nio.file.*
 import java.nio.file.attribute.*
 import java.util.function.BiPredicate
@@ -22,7 +20,7 @@ interface FilesContract {
     fun newDirectoryStream(dir: Path, glob: String): DirectoryStream<Path>
     fun newDirectoryStream(dir: Path, filter: DirectoryStream.Filter<in Path>): DirectoryStream<Path>
     fun createFile(path: Path, vararg attrs: FileAttribute<*>): Path
-    fun createDirectory(dir: Path?, vararg attrs: FileAttribute<*>): Path
+    fun createDirectory(dir: Path, vararg attrs: FileAttribute<*>): Path
     fun createDirectories(dir: Path, vararg attrs: FileAttribute<*>): Path
     fun createTempFile(dir: Path, prefix: String, suffix: String, vararg attrs: FileAttribute<*>): Path
     fun createTempFile(prefix: String, suffix: String, vararg attrs: FileAttribute<*>): Path
@@ -40,7 +38,7 @@ interface FilesContract {
     fun isHidden(path: Path): Boolean
     fun probeContentType(path: Path): String
     fun <V : FileAttributeView> getFileAttributeView(path: Path, type: Class<V>, vararg options: LinkOption): V?
-    fun <A : BasicFileAttributes> readAttributes(path: Path?, type: Class<A>, vararg options: LinkOption): A
+    fun <A : BasicFileAttributes> readAttributes(path: Path, type: Class<A>, vararg options: LinkOption): A
     fun setAttribute(path: Path, attribute: String, value: Any, vararg options: LinkOption): Path
     fun getAttribute(path: Path, attribute: String, vararg options: LinkOption): Any
     fun readAttributes(path: Path, attributes: String, vararg options: LinkOption): Map<String, Any>
@@ -49,7 +47,7 @@ interface FilesContract {
     fun getOwner(path: Path, vararg options: LinkOption): UserPrincipal
     fun setOwner(path: Path, owner: UserPrincipal): Path
     fun isSymbolicLink(path: Path): Boolean
-    fun isDirectory(path: Path?, vararg options: LinkOption): Boolean
+    fun isDirectory(path: Path, vararg options: LinkOption): Boolean
     fun isRegularFile(path: Path, vararg options: LinkOption): Boolean
     fun getLastModifiedTime(path: Path, vararg options: LinkOption): FileTime
     fun setLastModifiedTime(path: Path, time: FileTime): Path
@@ -61,19 +59,32 @@ interface FilesContract {
     fun isExecutable(path: Path): Boolean
     fun walkFileTree(start: Path, options: Set<FileVisitOption>, maxDepth: Int, visitor: FileVisitor<in Path>): Path
     fun walkFileTree(start: Path, visitor: FileVisitor<in Path>): Path
-    fun newBufferedReader(path: Path, cs: Charset = StandardCharsets.UTF_8): BufferedReader
+    fun newBufferedReader(path: Path, cs: Charset): BufferedReader
+    fun newBufferedReader(path: Path): BufferedReader
     fun newBufferedWriter(path: Path, cs: Charset, vararg options: OpenOption): BufferedWriter
     fun newBufferedWriter(path: Path, vararg options: OpenOption): BufferedWriter
     fun copy(`in`: InputStream, target: Path, vararg options: CopyOption): Long
     fun copy(source: Path, out: OutputStream): Long
     fun readAllBytes(path: Path): ByteArray
-    fun readAllLines(path: Path, cs: Charset = StandardCharsets.UTF_8): List<String>
+    fun readString(path: Path): String
+    fun readString(path: Path, cs: Charset): String
+    fun readAllLines(path: Path, cs: Charset): List<String>
+    fun readAllLines(path: Path): List<String>
     fun write(path: Path, bytes: ByteArray, vararg options: OpenOption): Path
     fun write(path: Path, lines: Iterable<CharSequence>, cs: Charset, vararg options: OpenOption): Path
     fun write(path: Path, lines: Iterable<CharSequence>, vararg options: OpenOption): Path
+    fun writeString(path: Path, csq: CharSequence, vararg options: OpenOption): Path
+    fun writeString(path: Path, csq: CharSequence, cs: Charset, vararg options: OpenOption): Path
     fun list(dir: Path): Stream<Path>
-    fun walk(start: Path, maxDepth: Int, vararg options: FileVisitOption): Stream<Path>
     fun walk(start: Path, vararg options: FileVisitOption): Stream<Path>
-    fun find(start: Path, maxDepth: Int, matcher: BiPredicate<Path, BasicFileAttributes>, vararg options: FileVisitOption): Stream<Path>
-    fun lines(path: Path, cs: Charset = StandardCharsets.UTF_8): Stream<String>
+    fun walk(start: Path, maxDepth: Int, vararg options: FileVisitOption): Stream<Path>
+    fun find(
+            start: Path,
+            maxDepth: Int,
+            matcher: BiPredicate<Path, BasicFileAttributes>,
+            vararg options: FileVisitOption
+    ): Stream<Path>
+
+    fun lines(path: Path, cs: Charset): Stream<String>
+    fun lines(path: Path): Stream<String>
 }
