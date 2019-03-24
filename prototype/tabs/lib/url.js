@@ -1,4 +1,4 @@
-const createUrl = () => {
+const createUrlLib = () => {
     const keyValueStringToPair = (keyValueString) => {
         const parts = keyValueString.split("=");
         return {
@@ -56,6 +56,7 @@ const createUrl = () => {
     };
 
     return {
-        parseUrl
+        parseUrl,
+        lookupSingleValueFromQuery
     }
 };
