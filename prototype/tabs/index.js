@@ -20,43 +20,43 @@ const urlToPageName = (url) => {
 const model = {
     'a': {
         tabBars: [[
-            {title: 'A Title', page: 'a', active: true},
-            {title: 'C Title', page: 'c', active: false},
-            {title: 'E Title', page: 'e', active: false}]],
+            {title: 'A Title', page: 'a', selected: true},
+            {title: 'C Title', page: 'c', selected: false},
+            {title: 'E Title', page: 'e', selected: false}]],
         fragment: 'a.html'
     },
     'c': {
         tabBars: [
             [
-                {title: 'A Title', page: 'a', active: false},
-                {title: 'C Title', page: 'c', active: true},
-                {title: 'E Title', page: 'e', active: false}
+                {title: 'A Title', page: 'a', selected: false},
+                {title: 'C Title', page: 'c', selected: true},
+                {title: 'E Title', page: 'e', selected: false}
             ],
             [
-                {title: 'C Title', page: 'c', active: true},
-                {title: 'D Title', page: 'd', active: false}
+                {title: 'C Title', page: 'c', selected: true},
+                {title: 'D Title', page: 'd', selected: false}
             ]],
         fragment: 'b/c.html'
     },
     'd': {
         tabBars: [
             [
-                {title: 'A Title', page: 'a', active: false},
-                {title: 'C Title', page: 'c', active: true},
-                {title: 'E Title', page: 'e', active: false}
+                {title: 'A Title', page: 'a', selected: false},
+                {title: 'C Title', page: 'c', selected: true},
+                {title: 'E Title', page: 'e', selected: false}
             ],
             [
-                {title: 'C Title', page: 'c', active: false},
-                {title: 'D Title', page: 'd', active: true}
+                {title: 'C Title', page: 'c', selected: false},
+                {title: 'D Title', page: 'd', selected: true}
             ]],
         fragment: 'b/d.html'
     },
     'e': {
         tabBars: [
             [
-                {title: 'A Title', page: 'a', active: false},
-                {title: 'C Title', page: 'c', active: false},
-                {title: 'E Title', page: 'e', active: true}
+                {title: 'A Title', page: 'a', selected: false},
+                {title: 'C Title', page: 'c', selected: false},
+                {title: 'E Title', page: 'e', selected: true}
             ]],
         fragment: 'e.html'
     }
@@ -79,14 +79,16 @@ const renderParagraph = (text) => {
     return p;
 };
 
-const renderTabBar = (tabBar) => {
+const renderTabBar = (args) => {
+    const {tabBar, index} = args;
     const ul = createUl();
+    ul.classList.add('nav-' + index);
     const appendTab = (tab) => {
         const li = createLi();
         const link = createLink({href: '?page=' + tab.page, text: tab.title});
         li.appendChild(link);
-        if (tab.active) {
-            li.classList.add('active');
+        if (tab.selected) {
+            li.classList.add('selected');
         }
         ul.appendChild(li);
     };
@@ -101,8 +103,10 @@ const renderFragment = async (fragmentName) => {
 const renderPageModel = async (pageModel) => {
     const {tabBars, fragment} = pageModel;
     const div = createDiv();
+    let index = 0;
     const appendTabBar = (tabBar) => {
-        const renderedTabBar = renderTabBar(tabBar);
+        index++;
+        const renderedTabBar = renderTabBar({tabBar, index});
         div.appendChild(renderedTabBar);
     };
     tabBars.forEach(appendTabBar);
@@ -119,7 +123,6 @@ const render = async () => {
 };
 
 const init = async () => {
-    debugText(urlToPageName(window.location));
     document.body.appendChild(await render());
 };
 
