@@ -41,7 +41,7 @@ const renderTabBar = (args) => {
 };
 
 const renderFragment = async (fragmentName) => {
-    return await fragmentLib.loadElementFromUrl(fragmentName)
+    return await fragmentLib.loadElementFromUrl('content/' + fragmentName)
 };
 
 const renderPageModel = async (pageModel) => {
