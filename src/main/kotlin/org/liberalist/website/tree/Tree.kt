@@ -8,12 +8,6 @@ sealed class Tree<T> {
     fun toLines(): List<String> = toLines(0)
 
     companion object {
-        fun <T> List<Tree<T>>.leafPaths(): List<List<T>> =
-                this.flatMap { it.leafPaths(emptyList()) }
-
-        fun <T> List<Tree<T>>.toLines(): List<String> =
-                this.flatMap { it.toLines(0) }
-
         fun indent(depth: Int): String = "  ".repeat(depth)
 
     }
