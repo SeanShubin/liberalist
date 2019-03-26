@@ -5,6 +5,7 @@ sealed class Tree<T> {
     abstract val firstLeafValue: T
     abstract fun leafPaths(from: List<T>): List<List<T>>
     abstract fun toLines(depth: Int): List<String>
+    fun toLines(): List<String> = toLines(0)
 
     companion object {
         fun <T> List<Tree<T>>.leafPaths(): List<List<T>> =

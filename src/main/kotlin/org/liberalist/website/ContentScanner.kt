@@ -4,5 +4,5 @@ import org.liberalist.website.tree.Tree
 import java.nio.file.Path
 
 interface ContentScanner {
-    fun findSources(): List<Tree<Path>>
+    fun findSources(): Tree<Path>
 }
