@@ -28,5 +28,7 @@ object DependencyInjection {
             notifications::fileWrite,
             fileFilter)
     private val fileCopier: () -> Unit = HtmlCssJsFileCopier(sourceDir, generatedDir, files)
-    val deploySiteRunner: Runnable = DeploySite(htmlGenerator, fileCopier)
+    private val contentScanner: ContentScanner = ContentScannerImpl(files, sourceDir)
+    private val logger: Logger = LineEmittingLogger(emitLine)
+    val deploySiteRunner: Runnable = DeploySite(contentScanner, logger::foundSources)
 }

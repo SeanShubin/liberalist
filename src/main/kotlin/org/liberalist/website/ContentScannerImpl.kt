@@ -8,8 +8,8 @@ import java.nio.file.Path
 import kotlin.streams.toList
 
 class ContentScannerImpl(private val files: FilesContract,
-                         private val basePath: Path) : ContentScanner {
-    override fun findSources(): Tree<Path> = findSources(basePath)!!
+                         private val sourceDir: Path) : ContentScanner {
+    override fun findSources(): Tree<Path> = findSources(sourceDir)!!
 
     private fun findSources(path: Path): Tree<Path>? =
             when {

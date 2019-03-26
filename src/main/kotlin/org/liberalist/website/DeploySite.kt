@@ -1,9 +1,12 @@
 package org.liberalist.website
 
-class DeploySite(private val htmlGenerator: () -> Unit,
-                 private val fileCopier: () -> Unit) : Runnable {
+import org.liberalist.website.tree.Tree
+import java.nio.file.Path
+
+class DeploySite(private val contentScanner: ContentScanner,
+                 private val foundSources: (Tree<Path>) -> Unit) : Runnable {
     override fun run() {
-        htmlGenerator()
-        fileCopier()
+        val sources = contentScanner.findSources()
+        foundSources(sources)
     }
 }
