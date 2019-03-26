@@ -6,19 +6,18 @@ import org.liberalist.website.test.TestUtil
 import org.liberalist.website.test.TestUtil.loadResource
 import org.liberalist.website.tree.Branch
 import org.liberalist.website.tree.Leaf
-import org.liberalist.website.tree.Tree
 import kotlin.test.Test
 
 class ModelGeneratorImplTest {
     @Test
     fun sample() {
         // given
-        val trees: List<Tree<String>> = listOf(
+        val branch: Branch<String> = Branch("root", listOf(
                 Leaf("a"),
                 Branch("b", listOf(
                         Leaf("c"),
                         Leaf("d"))),
-                Leaf("e"))
+                Leaf("e")))
         val titles = mapOf(
                 Pair("a", "A Title"),
                 Pair("c", "C Title"),
@@ -28,7 +27,7 @@ class ModelGeneratorImplTest {
         val expectedJson = loadResource("/sample-model.json")
 
         // when
-        val actual = modelGenerator.createModel(trees, titles)
+        val actual = modelGenerator.createModel(branch, titles)
         val actualJson = JsonUtil.mapper.writeValueAsString(actual)
 
         // then
