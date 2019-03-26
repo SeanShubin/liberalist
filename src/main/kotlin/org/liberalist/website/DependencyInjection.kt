@@ -11,6 +11,7 @@ object DependencyInjection {
     private val baseDir: Path = Paths.get(".")
     private val sourceDir: Path = baseDir.resolve("content")
     private val generatedDir: Path = baseDir.resolve(Paths.get("build", "html"))
+    private val sourceStaticDir: Path = baseDir.resolve("static")
     private val files: FilesContract = FilesDelegate
     private val charset: Charset = StandardCharsets.UTF_8
     private val markdownToHtmlConverter: MarkdownToHtmlConverter = FlexmarkConverter
@@ -28,6 +29,8 @@ object DependencyInjection {
 //            notifications::fileWrite,
 //            fileFilter)
     private val fileCopier: () -> Unit = HtmlCssJsFileCopier(sourceDir, generatedDir, files)
+    private val staticContentCopier: StaticContentCopier = StaticContentCopierImpl(
+            files, sourceStaticDir, generatedDir)
     private val contentScanner: ContentScanner = ContentScannerImpl(files, sourceDir)
     private val logger: Logger = LineEmittingLogger(emitLine)
     private val htmlGenerator: HtmlGenerator = HtmlGeneratorImpl(
@@ -36,5 +39,6 @@ object DependencyInjection {
             contentScanner,
             logger::foundSources,
             htmlGenerator,
-            logger::htmlConversionEvent)
+            logger::htmlConversionEvent,
+            staticContentCopier)
 }
