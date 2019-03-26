@@ -18,17 +18,22 @@ object DependencyInjection {
     private val emitLine: (String) -> Unit = ::println
     private val notifications: Notifications = LineEmittingNotifications(emitLine)
     private val fileFilter: FileFilter = FileFilter(files)
-    private val htmlGenerator: () -> Unit = MarkdownHtmlGenerator(
-            sourceDir,
-            generatedDir,
-            files,
-            charset,
-            markdownToHtmlConverter,
-            tabToHtmlConverter,
-            notifications::fileWrite,
-            fileFilter)
+    //    private val htmlGenerator: () -> Unit = MarkdownHtmlGenerator(
+//            sourceDir,
+//            generatedDir,
+//            files,
+//            charset,
+//            markdownToHtmlConverter,
+//            tabToHtmlConverter,
+//            notifications::fileWrite,
+//            fileFilter)
     private val fileCopier: () -> Unit = HtmlCssJsFileCopier(sourceDir, generatedDir, files)
     private val contentScanner: ContentScanner = ContentScannerImpl(files, sourceDir)
     private val logger: Logger = LineEmittingLogger(emitLine)
-    val deploySiteRunner: Runnable = DeploySite(contentScanner, logger::foundSources)
+    private val htmlGenerator: HtmlGenerator = HtmlGeneratorImpl()
+    val deploySiteRunner: Runnable = DeploySite(
+            contentScanner,
+            logger::foundSources,
+            htmlGenerator,
+            logger::htmlConversionEvent)
 }

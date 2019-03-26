@@ -7,4 +7,8 @@ class LineEmittingLogger(private val emitLine: (String) -> Unit) : Logger {
     override fun foundSources(sources: Tree<Path>) {
         sources.toLines().forEach(emitLine)
     }
+
+    override fun htmlConversionEvent(result: Tree<HtmlConversion>) {
+        TODO("not implemented")
+    }
 }

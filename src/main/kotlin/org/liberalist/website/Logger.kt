@@ -5,4 +5,5 @@ import java.nio.file.Path
 
 interface Logger {
     fun foundSources(sources: Tree<Path>)
+    fun htmlConversionEvent(result: Tree<HtmlConversion>)
 }
