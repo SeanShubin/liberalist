@@ -29,7 +29,7 @@ const renderTabBar = (args) => {
     ul.classList.add('nav-' + index);
     const appendTab = (tab) => {
         const li = createLi();
-        const link = createLink({href: '?page=' + tab.page, text: tab.title});
+        const link = createLink({href: '?page=' + tab.name, text: tab.title});
         li.appendChild(link);
         if (tab.selected) {
             li.classList.add('selected');
@@ -45,7 +45,7 @@ const renderFragment = async (fragmentName) => {
 };
 
 const renderPageModel = async (pageModel) => {
-    const {tabBars, fragment} = pageModel;
+    const {tabBars, content} = pageModel;
     const div = createDiv();
     let index = 0;
     const appendTabBar = (tabBar) => {
@@ -54,7 +54,7 @@ const renderPageModel = async (pageModel) => {
         div.appendChild(renderedTabBar);
     };
     tabBars.forEach(appendTabBar);
-    const renderedFragment = await renderFragment(fragment);
+    const renderedFragment = await renderFragment(content);
     div.appendChild(renderedFragment);
     return div;
 };

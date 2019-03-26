@@ -4,10 +4,9 @@ import com.vladsch.flexmark.ast.Heading
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.options.MutableDataSet
-import org.liberalist.website.compare.ListDifference
+import org.liberalist.website.test.TestUtil.assertMultilineEquals
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class FlexmarkTest {
     @Test
@@ -54,12 +53,5 @@ class FlexmarkTest {
             list.add(this.next())
         }
         return list
-    }
-
-    private fun assertMultilineEquals(expected: String, actual: String) {
-        val difference = ListDifference.compare(
-                "expected", expected,
-                "actual  ", actual)
-        assertTrue(difference.isSame, difference.messageLines.joinToString("\n"))
     }
 }
