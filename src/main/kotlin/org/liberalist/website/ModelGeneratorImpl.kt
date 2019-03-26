@@ -1,40 +1,30 @@
 package org.liberalist.website
 
-import org.liberalist.website.ModelGenerator.Page
-import org.liberalist.website.ModelGenerator.Tab
+import org.liberalist.website.contract.FilesContract
+import org.liberalist.website.json.JsonUtil
 import org.liberalist.website.tree.Branch
+import org.liberalist.website.tree.Tree
+import java.nio.charset.Charset
+import java.nio.file.Path
 
-class ModelGeneratorImpl : ModelGenerator {
-    override fun createModel(branch: Branch<String>,
-                             titles: Map<String, String>): Map<String, Page> {
-        val paths = branch.children.flatMap { it.leafPaths(emptyList()) }
-        fun createEntryWithTrees(path: List<String>) = createEntry(path, branch, titles)
-        return paths.map(::createEntryWithTrees).toMap()
+class ModelGeneratorImpl(
+        private val generatedDirectory: Path,
+        private val files: FilesContract,
+        private val charset: Charset,
+        private val modelFactory: ModelFactory) : ModelGenerator {
+    override fun generateModel(htmlGeneratorResult: Tree<HtmlConversion>) {
+        val tree: Tree<String> = htmlGeneratorResult.map { it.name }
+        tree as Branch<String>
+        val titles = createTitlesMap(htmlGeneratorResult)
+        val model = modelFactory.createModel(tree, titles)
+        val modelJson = JsonUtil.mapper.writeValueAsString(model)
+        val modelPath = generatedDirectory.resolve("model.json")
+        files.writeString(modelPath, modelJson, charset)
     }
 
-    private fun createEntry(path: List<String>, branch: Branch<String>, titles: Map<String, String>): Pair<String, Page> {
-        val name = path[path.size - 1]
-        val content = path.joinToString("/") + ".html"
-        val tabBars = createTabBars(path, branch, titles)
-        return Pair(name, Page(tabBars, content))
-    }
-
-    private fun createTabBars(path: List<String>, branch: Branch<String>, titles: Map<String, String>): List<List<Tab>> {
-        val tabBars = mutableListOf<List<Tab>>()
-        val firstTabBar = mutableListOf<Tab>()
-        val remainingTabBars = mutableListOf<List<Tab>>()
-        for (child in branch.children) {
-            val selected = child.value == path[0]
-            val name = child.firstLeafValue
-            val title = titles.getValue(name)
-            firstTabBar.add(Tab(name, title, selected))
-            if (selected && child is Branch) {
-                val childPath = path.subList(1, path.size)
-                remainingTabBars.addAll(createTabBars(childPath, child, titles))
-            }
-        }
-        tabBars.add(firstTabBar)
-        tabBars.addAll(remainingTabBars)
-        return tabBars
-    }
+    private fun createTitlesMap(htmlGeneratorResult: Tree<HtmlConversion>): Map<String, String> =
+            htmlGeneratorResult.leafNodes().map { leaf ->
+                val htmlConversion = leaf.value as HtmlConversionFile
+                Pair(htmlConversion.name, htmlConversion.title)
+            }.toMap()
 }

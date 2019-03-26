@@ -2,6 +2,7 @@ package org.liberalist.website
 
 import org.liberalist.website.contract.FilesContract
 import java.nio.file.Path
+import java.nio.file.StandardCopyOption
 
 class StaticContentCopierImpl(private val files: FilesContract,
                               private val baseFromDir: Path,
@@ -15,11 +16,13 @@ class StaticContentCopierImpl(private val files: FilesContract,
         list.forEach { file ->
             if (files.isDirectory(file)) {
                 val newToDir = toDir.resolve(file.fileName)
-                files.createDirectory(newToDir)
+                if (!files.exists(newToDir)) {
+                    files.createDirectory(newToDir)
+                }
                 copyDir(file, newToDir)
             } else {
                 val newFile = toDir.resolve(file.fileName)
-                files.copy(file, newFile)
+                files.copy(file, newFile, StandardCopyOption.REPLACE_EXISTING)
             }
         }
     }

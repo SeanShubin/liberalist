@@ -35,10 +35,17 @@ object DependencyInjection {
     private val logger: Logger = LineEmittingLogger(emitLine)
     private val htmlGenerator: HtmlGenerator = HtmlGeneratorImpl(
             sourceDir, generatedDir, files, markdownToHtmlConverter, charset)
+    private val modelFactory: ModelFactory = ModelFactoryImpl()
+    private val modelGenerator: ModelGenerator = ModelGeneratorImpl(
+            generatedDir,
+            files,
+            charset,
+            modelFactory)
     val deploySiteRunner: Runnable = DeploySite(
             contentScanner,
             logger::foundSources,
             htmlGenerator,
             logger::htmlConversionEvent,
-            staticContentCopier)
+            staticContentCopier,
+            modelGenerator)
 }
