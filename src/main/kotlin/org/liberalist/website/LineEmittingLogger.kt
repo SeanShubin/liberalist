@@ -9,6 +9,6 @@ class LineEmittingLogger(private val emitLine: (String) -> Unit) : Logger {
     }
 
     override fun htmlConversionEvent(result: Tree<HtmlConversion>) {
-        TODO("not implemented")
+        result.toLines().forEach(emitLine)
     }
 }

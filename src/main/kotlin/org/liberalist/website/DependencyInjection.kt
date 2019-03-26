@@ -30,7 +30,8 @@ object DependencyInjection {
     private val fileCopier: () -> Unit = HtmlCssJsFileCopier(sourceDir, generatedDir, files)
     private val contentScanner: ContentScanner = ContentScannerImpl(files, sourceDir)
     private val logger: Logger = LineEmittingLogger(emitLine)
-    private val htmlGenerator: HtmlGenerator = HtmlGeneratorImpl()
+    private val htmlGenerator: HtmlGenerator = HtmlGeneratorImpl(
+            sourceDir, generatedDir, files, markdownToHtmlConverter, charset)
     val deploySiteRunner: Runnable = DeploySite(
             contentScanner,
             logger::foundSources,

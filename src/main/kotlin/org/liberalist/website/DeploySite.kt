@@ -10,8 +10,7 @@ class DeploySite(private val contentScanner: ContentScanner,
     override fun run() {
         val sources = contentScanner.findSources()
         foundSourcesEvent(sources)
-        val htmlGeneratorResult = htmlGenerator.generateHtml()
+        val htmlGeneratorResult = htmlGenerator.generateHtml(sources)
         htmlGeneratorEvent(htmlGeneratorResult)
-        
     }
 }

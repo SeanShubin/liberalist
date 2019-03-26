@@ -5,6 +5,7 @@ sealed class Tree<T> {
     abstract val firstLeafValue: T
     abstract fun leafPaths(from: List<T>): List<List<T>>
     abstract fun toLines(depth: Int): List<String>
+    abstract fun <U> map(f: (T) -> U): Tree<U>
     fun toLines(): List<String> = toLines(0)
 
     companion object {
@@ -15,10 +16,9 @@ sealed class Tree<T> {
 
 class Leaf<T>(override val value: T) : Tree<T>() {
     override fun leafPaths(from: List<T>): List<List<T>> = listOf(from + value)
-    override val firstLeafValue: T
-        get() = value
-
+    override val firstLeafValue: T get() = value
     override fun toLines(depth: Int): List<String> = listOf(indent(depth) + value.toString())
+    override fun <U> map(f: (T) -> U): Tree<U> = Leaf(f(value))
 }
 
 class Branch<T>(override val value: T, val children: List<Tree<T>>) : Tree<T>() {
@@ -35,4 +35,6 @@ class Branch<T>(override val value: T, val children: List<Tree<T>>) : Tree<T>() 
         val childLines = children.flatMap { it.toLines(depth + 1) }
         return firstLine + childLines
     }
+
+    override fun <U> map(f: (T) -> U): Tree<U> = Branch(f(value), children.map { it.map(f) })
 }

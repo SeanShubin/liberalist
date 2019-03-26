@@ -1,0 +1,94 @@
+:root {
+    --liberalist-blue: #006ec3;
+    --liberalist-light-gray: #ddd;
+    --liberalist-dark-gray: #333;
+}
+
+h1, h2, h5, a, p {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: grid;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+a {
+    text-decoration-line: none;
+    color: var(--liberalist-blue);
+}
+
+h1 {
+    font-size: 2em;
+    color: var(--liberalist-blue);
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 225%;
+}
+
+h5 {
+    font-size: 0.83em;
+    color: var(--liberalist-dark-gray);
+}
+
+p {
+    line-height: 1.65em;
+    font-size: 14px;
+    color: var(--liberalist-dark-gray);
+    margin-bottom: 14px;
+}
+
+.nav-1 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--liberalist-light-gray);
+}
+
+.nav-1 li {
+    border-left: 1px solid var(--liberalist-light-gray);
+    border-top: 1px solid var(--liberalist-light-gray);
+    border-right: 1px solid var(--liberalist-light-gray);
+    margin-right: 5px;
+    padding: 10px 17px;
+    color: var(--liberalist-blue);
+}
+
+.nav-1 .selected {
+    background-color: var(--liberalist-blue);
+}
+
+.nav-1 .selected a {
+    font-weight: bold;
+    color: white;
+}
+
+.nav-2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.nav-2 li {
+    margin-right: 20px;
+    font-size: 80%;
+}
+
+.nav-2 li:first-of-type a {
+    font-weight: bold;
+    color: black;
+    border-right: solid 1px var(--liberalist-light-gray);
+    padding-right: 20px;
+}
+
+.nav-2 .selected a {
+    border-bottom: 1px solid var(--liberalist-light-gray);
+    color: var(--liberalist-dark-gray);
+}

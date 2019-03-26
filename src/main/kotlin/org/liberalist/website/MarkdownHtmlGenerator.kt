@@ -45,7 +45,7 @@ class MarkdownHtmlGenerator(private val sourceMarkdownDir: Path,
         val relative = sourceMarkdownDir.relativize(markdownFile)
         val htmlFile = replaceExtension(generatedHtmlDir.resolve(relative), "html")
         val markdownContent = readFile(markdownFile)
-        val htmlContent: String = markdownToHtmlConverter.markdownToHtml(markdownContent)
+        val (title, htmlContent) = markdownToHtmlConverter.markdownToHtml(markdownContent)
         writeFile(htmlFile, htmlContent)
         val tabPath = TabPath.fromPath(filesContract, sourceMarkdownDir, markdownFile)
         val tab = Tab(tabPath)

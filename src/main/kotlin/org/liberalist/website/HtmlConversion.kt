@@ -2,4 +2,16 @@ package org.liberalist.website
 
 import java.nio.file.Path
 
-data class HtmlConversion(val original: Path, val generated: Path, val name: String, val title: String)
+sealed class HtmlConversion {
+    abstract val original: Path
+    abstract val name: String
+}
+
+data class HtmlConversionFile(
+        override val original: Path,
+        val generated: Path,
+        override val name: String,
+        val title: String) : HtmlConversion()
+
+data class HtmlConversionDir(override val original: Path,
+                             override val name: String) : HtmlConversion()
