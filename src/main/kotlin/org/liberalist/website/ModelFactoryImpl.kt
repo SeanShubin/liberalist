@@ -1,15 +1,17 @@
 package org.liberalist.website
 
-import org.liberalist.website.ModelFactory.Page
+import org.liberalist.website.ModelFactory.*
 import org.liberalist.website.ModelFactory.Tab
 import org.liberalist.website.tree.Branch
 
 class ModelFactoryImpl : ModelFactory {
     override fun createModel(branch: Branch<String>,
-                             titles: Map<String, String>): Map<String, Page> {
+                             titles: Map<String, String>): Model {
         val paths = branch.children.flatMap { it.leafPaths(emptyList()) }
         fun createEntryWithTrees(path: List<String>) = createEntry(path, branch, titles)
-        return paths.map(::createEntryWithTrees).toMap()
+        val pages = paths.map(::createEntryWithTrees).toMap()
+        val home = branch.firstLeafValue
+        return Model(home, pages)
     }
 
     private fun createEntry(path: List<String>, branch: Branch<String>, titles: Map<String, String>): Pair<String, Page> {
