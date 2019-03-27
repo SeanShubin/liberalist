@@ -8,9 +8,13 @@ const createUrlLib = () => {
     };
 
     const queryToKeyValueArray = (query) => {
-        const keyValueStrings = query.split("&");
-        const keyValuePairs = keyValueStrings.map(keyValueStringToPair);
-        return keyValuePairs;
+        if (query) {
+            const keyValueStrings = query.split("&");
+            const keyValuePairs = keyValueStrings.map(keyValueStringToPair);
+            return keyValuePairs;
+        } else {
+            return [];
+        }
     };
 
     const exactlyOne = (array) => {
