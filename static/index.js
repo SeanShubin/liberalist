@@ -63,8 +63,12 @@ const render = async () => {
     const pageName = urlToPageName(url);
     const model = await modelPromise;
     const pages = model['pages'];
-    const pageModel = pages[pageName] || pages[model["home"]];
-    return await renderPageModel(pageModel)
+    const pageModel = pages[pageName];
+    if (pageModel) {
+        return await renderPageModel(pageModel)
+    } else {
+        window.location = 'index.html?page=' + model["home"];
+    }
 };
 
 const init = async () => {
