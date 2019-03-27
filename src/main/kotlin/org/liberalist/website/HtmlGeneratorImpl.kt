@@ -34,7 +34,15 @@ class HtmlGeneratorImpl(val baseSource: Path,
 
     private fun writeString(path: Path, text: String, charset: Charset) {
         files.createDirectories(path.parent)
-        files.writeString(path, text, charset)
+        val newText = workaroundToBugWhereSomeCharsWillNotWriteProperlyToFiles(text)
+        files.writeString(path, newText, charset)
+    }
+
+    private fun workaroundToBugWhereSomeCharsWillNotWriteProperlyToFiles(text: String): String {
+        val enDash = '\u2013'
+        val leftSingleQuotationMark = '\u2018'
+        val rightSingleQuotationMark = '\u2019'
+        return text.replace(enDash, '-').replace(leftSingleQuotationMark, '\'').replace(rightSingleQuotationMark, '\'')
     }
 
     private fun generateHtmlDir(path: Path): HtmlConversion =
