@@ -24,7 +24,7 @@ class HtmlGeneratorImpl(val baseSource: Path,
     private fun generateHtmlFile(markdownPath: Path): HtmlConversion {
         val relativePath = baseSource.relativize(markdownPath)
         val nameParts = toNameParts(relativePath)
-        val htmlPath = baseGenerated.resolve(Paths.get(nameParts.joinToString("/") + ".html"))
+        val htmlPath = baseGenerated.resolve(Paths.get("content/" + nameParts.joinToString("/") + ".html"))
         val name = nameParts[nameParts.size - 1]
         val markdown = files.readString(markdownPath, charset)
         val (title, html) = markdownToHtmlConverter.markdownToHtml(markdown)
