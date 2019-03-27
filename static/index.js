@@ -63,11 +63,7 @@ const render = async () => {
     const pageName = urlToPageName(url);
     const model = await modelPromise;
     const pages = model['pages'];
-    console.log('model', model);
-    console.log('model[pageName]', pages[pageName]);
-    console.log('model[model["home"]]', pages[model["home"]]);
     const pageModel = pages[pageName] || pages[model["home"]];
-    console.log('pageModel', pageModel);
     return await renderPageModel(pageModel)
 };
 
