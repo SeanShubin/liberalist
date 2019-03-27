@@ -15,20 +15,7 @@ object DependencyInjection {
     private val files: FilesContract = FilesDelegate
     private val charset: Charset = StandardCharsets.UTF_8
     private val markdownToHtmlConverter: MarkdownToHtmlConverter = FlexmarkConverter
-    private val tabToHtmlConverter: TabToHtmlConverter = DefaultTabToHtmlConverter
     private val emitLine: (String) -> Unit = ::println
-    private val notifications: Notifications = LineEmittingNotifications(emitLine)
-    private val fileFilter: FileFilter = FileFilter(files)
-    //    private val htmlGenerator: () -> Unit = MarkdownHtmlGenerator(
-//            sourceDir,
-//            generatedDir,
-//            files,
-//            charset,
-//            markdownToHtmlConverter,
-//            tabToHtmlConverter,
-//            notifications::fileWrite,
-//            fileFilter)
-    private val fileCopier: () -> Unit = HtmlCssJsFileCopier(sourceDir, generatedDir, files)
     private val staticContentCopier: StaticContentCopier = StaticContentCopierImpl(
             files, sourceStaticDir, generatedDir)
     private val contentScanner: ContentScanner = ContentScannerImpl(files, sourceDir)

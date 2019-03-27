@@ -38,7 +38,7 @@ class HtmlGeneratorImpl(val baseSource: Path,
     }
 
     private fun generateHtmlDir(path: Path): HtmlConversion =
-            HtmlConversionDir(path, path.fileName.toString())
+            HtmlConversionDir(path, toNamePart(path.fileName))
 
     private fun toNameParts(path: Path): List<String> {
         return path.toList().map(::toNamePart)

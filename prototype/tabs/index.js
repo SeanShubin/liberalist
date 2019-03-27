@@ -40,10 +40,6 @@ const renderTabBar = (args) => {
     return ul;
 };
 
-const renderFragment = async (fragmentName) => {
-    return await fragmentLib.loadElementFromUrl('content/' + fragmentName)
-};
-
 const renderPageModel = async (pageModel) => {
     const {tabBars, content} = pageModel;
     const div = createDiv();
@@ -54,8 +50,11 @@ const renderPageModel = async (pageModel) => {
         div.appendChild(renderedTabBar);
     };
     tabBars.forEach(appendTabBar);
-    const renderedFragment = await renderFragment(content);
-    div.appendChild(renderedFragment);
+
+    const fragments = await fragmentLib.loadElementsFromUrl('content/' + content);
+    while (fragments.length > 0) {
+        div.appendChild(fragments.item(0));
+    }
     return div;
 };
 
