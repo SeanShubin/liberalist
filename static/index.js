@@ -72,7 +72,7 @@ const render = async () => {
 };
 
 const init = async () => {
-    document.body.appendChild(await render());
+    document.querySelector('.content').appendChild(await render());
 };
 
 const promise = init();
