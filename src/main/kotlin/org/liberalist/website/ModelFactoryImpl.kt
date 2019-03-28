@@ -26,11 +26,12 @@ class ModelFactoryImpl : ModelFactory {
         val firstTabBar = mutableListOf<Tab>()
         val remainingTabBars = mutableListOf<List<Tab>>()
         for (child in branch.children) {
-            val selected = child.value == path[0]
             val name = child.firstLeafValue
             val title = titles.getValue(name)
-            firstTabBar.add(Tab(name, title, selected))
-            if (selected && child is Branch) {
+            val selected = if (child.value == path[0]) true else null
+            val parent = if (child == branch.children[0]) true else null
+            firstTabBar.add(Tab(name, title, selected, parent))
+            if (selected == true && child is Branch) {
                 val childPath = path.subList(1, path.size)
                 remainingTabBars.addAll(createTabBars(childPath, child, titles))
             }

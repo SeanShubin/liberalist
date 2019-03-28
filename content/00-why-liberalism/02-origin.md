@@ -1,7 +1,7 @@
 # Origin
-In early 2018, youtuber Sargon of Akkad suggested using a label to positively assert a specific set of core beliefs in line with the spirit of liberalism.  In his words, "If someone who promotes Feminism is a Feminist, and someone who promotes Socialism is a Socialist, and someone who promotes Islamism is an Islamist, and someone who promotes Fascism is a Fascist, then someone who promotes Liberalism must be a Liberalist.  I say we use this label until it's dead or we find something better.".
+In early 2018, youtuber [Sargon of Akkad](https://www.youtube.com/watch?v=41y7L7BjDX0) suggested using a label to positively assert a specific set of core beliefs in line with the spirit of liberalism.  In his words, "If someone who promotes Feminism is a Feminist, and someone who promotes Socialism is a Socialist, and someone who promotes Islamism is an Islamist, and someone who promotes Fascism is a Fascist, then someone who promotes Liberalism must be a Liberalist.  I say we use this label until it's dead or we find something better.".
 
-Sargon of Akkad has since created [The Liberalist Society](http://liberalists.org/) website, where he listed a set of principles focused on liberalism.  As promoters of liberal values tend to be independently minded individualists, many have self-organized to create a subreddit, discord server, facebook group, and other resources.
+Sargon of Akkad has since created [The Liberalist Society](http://liberalists.org/) website, where he listed a set of principles focused on liberalism.  As promoters of liberal values tend to be independently minded individualists, many have self-organized to create a [subreddit](https://www.reddit.com/r/Liberalist/), [discord server](https://discordapp.com/invite/9fUxgaZ), [facebook group](https://www.facebook.com/groups/TheLiberalists/), and other resources.
 
 Here are some links to get started:
 

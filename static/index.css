@@ -4,7 +4,7 @@
     --liberalist-dark-gray: #333;
 }
 
-h1, h2, h5, a, p {
+h1, h2, h3, h4, h5, a, p {
     font-family: Arial, sans-serif;
 }
 
@@ -22,14 +22,26 @@ a {
     color: var(--liberalist-blue);
 }
 
-h1 {
+.header h1 {
     font-size: 2em;
     color: var(--liberalist-blue);
+    margin-bottom: 2px;
+}
+
+.content h1 {
+    font-size: 2em;
+    color: var(--liberalist-dark-gray);
+    margin-bottom: 10px;
 }
 
 h2 {
     margin-bottom: 15px;
     font-size: 225%;
+}
+
+h3 {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 h5 {
@@ -38,10 +50,18 @@ h5 {
 }
 
 p {
+    font-family: Arial, sans-serif;
     line-height: 1.65em;
     font-size: 14px;
     color: var(--liberalist-dark-gray);
     margin-bottom: 14px;
+}
+
+li {
+    font-family: Arial, sans-serif;
+    line-height: 1.65em;
+    font-size: 14px;
+    color: var(--liberalist-dark-gray);
 }
 
 .nav-1 {
@@ -86,9 +106,30 @@ p {
     color: black;
     border-right: solid 1px var(--liberalist-light-gray);
     padding-right: 20px;
+    border-bottom: 0;
 }
 
 .nav-2 .selected a {
     border-bottom: 1px solid var(--liberalist-light-gray);
+    color: var(--liberalist-dark-gray);
+}
+
+.content ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.content ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+
+.content li {
+    font-family: Arial, sans-serif;
+    line-height: 1.65em;
+    font-size: 14px;
     color: var(--liberalist-dark-gray);
 }

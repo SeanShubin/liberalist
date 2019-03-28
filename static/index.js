@@ -34,15 +34,18 @@ const renderTabBar = (args) => {
         if (tab.selected) {
             li.classList.add('selected');
         }
+        if (tab.parent) {
+            li.classList.add('parent');
+        }
         ul.appendChild(li);
     };
     tabBar.forEach(appendTab);
     return ul;
 };
 
-const renderPageModel = async (pageModel) => {
-    const {tabBars, content} = pageModel;
+const renderTabBars = async (tabBars) => {
     const div = createDiv();
+    div.classList.add('nav');
     let index = 0;
     const appendTabBar = (tabBar) => {
         index++;
@@ -50,11 +53,24 @@ const renderPageModel = async (pageModel) => {
         div.appendChild(renderedTabBar);
     };
     tabBars.forEach(appendTabBar);
+    return div;
+};
 
+const renderContent = async (content) => {
+    const div = createDiv();
+    div.classList.add('content');
     const fragments = await fragmentLib.loadElementsFromUrl('content/' + content);
     while (fragments.length > 0) {
         div.appendChild(fragments.item(0));
     }
+    return div;
+};
+
+const renderPageModel = async (pageModel) => {
+    const {tabBars, content} = pageModel;
+    const div = createDiv();
+    div.appendChild(await renderTabBars(tabBars));
+    div.appendChild(await renderContent(content));
     return div;
 };
 
@@ -72,7 +88,7 @@ const render = async () => {
 };
 
 const init = async () => {
-    document.querySelector('.content').appendChild(await render());
+    document.body.appendChild(await render());
 };
 
-const promise = init();
+let promise = init();

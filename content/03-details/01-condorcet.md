@@ -1,7 +1,7 @@
 # Condorcet
 The Condorcet Method of resolving votes
 
-## Goal
+### Goal
 If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.  This is known as the "Condorcet Winner Criterion".  Condorcet methods are good at ranking candidates in an order that accurately reflects voter preference.  The first step is allowing voters to express the entirety of their preference rather than just their #1 candidate.  A voter can do this by ranking candidates in order of preference.
 
 For example, lets say you have this situation
@@ -18,7 +18,7 @@ To see why consider this:
 - 60% of the voters would rather have A than C
 - 60% of the voters would rather have B than C
 
-When the candidates are compared in pairs using a Condorcet method, it is obvious the accurate voter preference is A, then B, then C.  But when only the voter's top most candidate is considered, we have thrown away so much information that the least preferred candidate, C, actually wins.  Since Condorcet method evaluate every candidate against every other candidate, the candidates in this same situation would be ranked A, then B, then C, which is consistent with the actual voter preference.
+When the candidates are compared in pairs using a Condorcet method, it is obvious the accurate voter preference is A, then B, then C.  But when only the voter's top most candidate is considered, we have thrown away so much information that the least preferred candidate, C, actually wins.  Since the Condorcet method evaluates every candidate against every other candidate, the candidates in this same situation would be ranked A, then B, then C, which is consistent with the actual voter preference.
 
 Now consider this dilemma
 
