@@ -1,13 +1,24 @@
 package org.liberalist.website
 
+import com.amazonaws.regions.Regions
+import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import org.liberalist.website.contract.FilesContract
 import org.liberalist.website.contract.FilesDelegate
+import org.liberalist.website.credentials.CredentialsProvider
+import org.liberalist.website.s3.S3ApiClient
+import org.liberalist.website.secrets.SecretsImpl
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 import java.nio.file.Paths
 
-object DependencyInjection {
+class DependencyInjection(args: Array<String>) {
+    private val secrets = SecretsImpl(
+            awsAccessKeyId = args[0],
+            awsSecretKey = args[1]
+    )
+    private val credentialsProvider =
+            CredentialsProvider(secrets.awsAccessKeyId, secrets.awsSecretKey)
     private val baseDir: Path = Paths.get(".")
     private val sourceDir: Path = baseDir.resolve("content")
     private val generatedDir: Path = baseDir.resolve(Paths.get("build", "html"))
@@ -28,11 +39,17 @@ object DependencyInjection {
             files,
             charset,
             modelFactory)
+    private val bucketName = "org.liberalist.website"
+    private val region = Regions.US_EAST_1
+    private val s3Client = AmazonS3ClientBuilder.standard().withCredentials(credentialsProvider).withRegion(region).build()
+    private val s3Api = S3ApiClient(s3Client, bucketName)
+    private val s3Uploader: S3Uploader = S3UploaderImpl(s3Api, generatedDir, files)
     val deploySiteRunner: Runnable = DeploySite(
             contentScanner,
             logger::foundSources,
             htmlGenerator,
             logger::htmlConversionEvent,
             staticContentCopier,
-            modelGenerator)
+            modelGenerator,
+            s3Uploader)
 }

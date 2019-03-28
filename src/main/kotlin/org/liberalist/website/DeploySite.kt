@@ -8,7 +8,8 @@ class DeploySite(private val contentScanner: ContentScanner,
                  private val htmlGenerator: HtmlGenerator,
                  private val htmlGeneratorEvent: (Tree<HtmlConversion>) -> Unit,
                  private val staticContentCopier: StaticContentCopier,
-                 private val modelGenerator: ModelGenerator) : Runnable {
+                 private val modelGenerator: ModelGenerator,
+                 private val s3Uploader: S3Uploader) : Runnable {
     override fun run() {
         val sources = contentScanner.findSources()
         foundSourcesEvent(sources)
@@ -16,5 +17,6 @@ class DeploySite(private val contentScanner: ContentScanner,
         htmlGeneratorEvent(htmlGeneratorResult)
         staticContentCopier.copyStaticContent()
         modelGenerator.generateModel(htmlGeneratorResult)
+        s3Uploader.uploadToS3()
     }
 }

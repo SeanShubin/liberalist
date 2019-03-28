@@ -15,10 +15,8 @@ dependencies {
     compile(kotlin("stdlib-jdk8"))
     compile("com.vladsch.flexmark", "flexmark-all", "0.34.46")
     compile("com.fasterxml.jackson.module", "jackson-module-kotlin", "2.9.8")
-//    testImplementation(kotlin("test"))
+    compile(group = "com.amazonaws", name = "aws-java-sdk-s3", version = "1.11.528")
     testImplementation(kotlin("test-junit"))
-//    testImplementation(kotlin("test-common"))
-//    testImplementation(kotlin("test-annotations-common"))
 }
 
 tasks.withType<KotlinCompile> {
