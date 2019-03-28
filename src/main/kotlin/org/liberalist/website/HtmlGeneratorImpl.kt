@@ -6,13 +6,29 @@ import java.nio.charset.Charset
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class HtmlGeneratorImpl(val baseSource: Path,
-                        val baseGenerated: Path,
-                        val files: FilesContract,
-                        val markdownToHtmlConverter: MarkdownToHtmlConverter,
-                        val charset: Charset) : HtmlGenerator {
-    override fun generateHtml(sources: Tree<Path>): Tree<HtmlConversion> =
-            sources.map(::generateHtml)
+class HtmlGeneratorImpl(private val baseSource: Path,
+                        private val baseGenerated: Path,
+                        private val files: FilesContract,
+                        private val markdownToHtmlConverter: MarkdownToHtmlConverter,
+                        private val charset: Charset) : HtmlGenerator {
+    override fun generateHtml(sources: Tree<Path>): Tree<HtmlConversion> {
+        val generated = sources.map(::generateHtml)
+        ensureNoDuplicateNames(generated)
+        return generated
+    }
+
+    private fun ensureNoDuplicateNames(generated: Tree<HtmlConversion>) {
+        val nodes = generated.leafNodes()
+        val size = nodes.size
+        for (i in 0 until size) {
+            for (j in i + 1 until size) {
+                if (nodes[i].value.name == nodes[j].value.name) {
+                    throw RuntimeException(
+                            "Duplicate name ${nodes[i].value.original} ${nodes[j].value.original}")
+                }
+            }
+        }
+    }
 
     private fun generateHtml(path: Path): HtmlConversion =
             if (files.isDirectory(path)) {
