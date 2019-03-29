@@ -39,7 +39,7 @@ class DependencyInjection(args: Array<String>) {
             files,
             charset,
             modelFactory)
-    private val bucketName = "org.liberalist.website"
+    private val bucketName = "liberalist.org"
     private val region = Regions.US_EAST_1
     private val s3Client = AmazonS3ClientBuilder.standard().withCredentials(credentialsProvider).withRegion(region).build()
     private val s3Api = S3ApiClient(s3Client, bucketName)
