@@ -88,7 +88,11 @@ const render = async () => {
 };
 
 const init = async () => {
-    document.body.appendChild(await render());
+    if (document.location.origin === "https://liberalist.org") {
+        window.location = "https://www.liberalist.org";
+    } else {
+        document.body.appendChild(await render());
+    }
 };
 
 let promise = init();
