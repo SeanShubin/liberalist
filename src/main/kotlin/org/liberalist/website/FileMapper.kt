@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
     val acceptFile: (Path) -> Boolean = { path -> path.toString().endsWith(".md") }
     val operation: (String, Path, Path) -> Unit = { name, src, dest -> println("$name: $src -> $dest") }
     val fileMapper = FileMapper(list, isDirectory, acceptFile, operation)
-    val baseDir = Paths.get("/Users/seanshubin/github/sean/liberalist/")
+    val baseDir = Paths.get(".")
     val srcDir = baseDir.resolve("content")
     val destDir = baseDir.resolve("build/html")
     fileMapper.map(srcDir, destDir)
